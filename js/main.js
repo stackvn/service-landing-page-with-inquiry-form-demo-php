@@ -1,358 +1,207 @@
 /**
- * TechFix Landing Page - Main JavaScript
- * Form validation, phone mask, animations, interactions
+ * МастерДом — Landing Page JavaScript
+ * Creative interactions and animations
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all modules
-    initHeader();
-    initMobileMenu();
+    initNavigation();
     initForm();
     initScrollAnimations();
     initSmoothScroll();
 });
 
-/* ========================================
-   Header Scroll Effect
-   ======================================== */
-function initHeader() {
-    const header = document.querySelector('.header');
-    const demoNotice = document.querySelector('.demo-notice');
+// Navigation
+function initNavigation() {
+    const navWrapper = document.getElementById('navWrapper');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    const mobileLinks = mobileNav.querySelectorAll('.mobile-nav__link');
     
-    if (!header) return;
-    
-    let lastScroll = 0;
-    
+    // Scroll effect
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        // Add scrolled class when scrolled past demo notice
-        if (demoNotice) {
-            const noticeHeight = demoNotice.offsetHeight;
-            if (currentScroll > noticeHeight) {
-                header.classList.add('header--scrolled');
-            } else {
-                header.classList.remove('header--scrolled');
-            }
+        if (window.pageYOffset > 50) {
+            navWrapper.classList.add('nav-wrapper--scrolled');
+        } else {
+            navWrapper.classList.remove('nav-wrapper--scrolled');
         }
-        
-        lastScroll = currentScroll;
     }, { passive: true });
-}
-
-/* ========================================
-   Mobile Menu
-   ======================================== */
-function initMobileMenu() {
-    const burger = document.querySelector('.burger');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const mobileLinks = document.querySelectorAll('.mobile-menu__link');
     
-    if (!burger || !mobileMenu) return;
+    // Mobile menu toggle
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('menu-toggle--active');
+        mobileNav.classList.toggle('mobile-nav--active');
+        document.body.style.overflow = mobileNav.classList.contains('mobile-nav--active') ? 'hidden' : '';
+    });
     
-    function toggleMenu() {
-        burger.classList.toggle('burger--active');
-        mobileMenu.classList.toggle('mobile-menu--active');
-        document.body.style.overflow = mobileMenu.classList.contains('mobile-menu--active') ? 'hidden' : '';
-    }
-    
-    function closeMenu() {
-        burger.classList.remove('burger--active');
-        mobileMenu.classList.remove('mobile-menu--active');
-        document.body.style.overflow = '';
-    }
-    
-    burger.addEventListener('click', toggleMenu);
-    
-    // Close menu when clicking links
+    // Close mobile menu on link click
     mobileLinks.forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
-    
-    // Close menu when clicking overlay
-    mobileMenu.addEventListener('click', (e) => {
-        if (e.target === mobileMenu) {
-            closeMenu();
-        }
-    });
-    
-    // Close menu on escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && mobileMenu.classList.contains('mobile-menu--active')) {
-            closeMenu();
-        }
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('menu-toggle--active');
+            mobileNav.classList.remove('mobile-nav--active');
+            document.body.style.overflow = '';
+        });
     });
 }
 
-/* ========================================
-   Form Validation & Submission
-   ======================================== */
+// Form handling
 function initForm() {
     const form = document.getElementById('requestForm');
     const nameInput = document.getElementById('name');
     const phoneInput = document.getElementById('phone');
-    const commentInput = document.getElementById('comment');
-    const submitBtn = form?.querySelector('.form__submit');
+    const submitBtn = form.querySelector('.form__submit');
+    const btnText = submitBtn.querySelector('.btn__text');
+    const btnLoader = submitBtn.querySelector('.btn__loader');
     
-    if (!form) return;
-    
-    // Phone mask initialization
-    initPhoneMask(phoneInput);
-    
-    // Real-time validation
-    nameInput?.addEventListener('blur', () => validateName(nameInput));
-    nameInput?.addEventListener('input', () => {
-        if (nameInput.classList.contains('form__input--error')) {
-            validateName(nameInput);
-        }
-    });
-    
-    phoneInput?.addEventListener('blur', () => validatePhone(phoneInput));
-    phoneInput?.addEventListener('input', () => {
-        if (phoneInput.classList.contains('form__input--error')) {
-            validatePhone(phoneInput);
-        }
-    });
-    
-    // Form submission
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        // Validate all fields
-        const isNameValid = validateName(nameInput);
-        const isPhoneValid = validatePhone(phoneInput);
-        
-        if (!isNameValid || !isPhoneValid) {
-            // Focus first invalid field
-            if (!isNameValid) {
-                nameInput.focus();
-            } else if (!isPhoneValid) {
-                phoneInput.focus();
-            }
-            return;
-        }
-        
-        // Disable button and show loader
-        if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.classList.add('btn--loading');
-        }
-        
-        // Simulate API request
-        try {
-            await simulateRequest(1500);
-            
-            // Show success modal
-            showSuccessModal();
-            
-            // Reset form
-            form.reset();
-            clearValidation(nameInput);
-            clearValidation(phoneInput);
-            
-        } catch (error) {
-            console.error('Submission error:', error);
-        } finally {
-            // Re-enable button
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.classList.remove('btn--loading');
-            }
-        }
-    });
-}
-
-/* ========================================
-   Phone Mask
-   ======================================== */
-function initPhoneMask(input) {
-    if (!input) return;
-    
-    input.addEventListener('input', (e) => {
+    // Phone mask
+    phoneInput.addEventListener('input', (e) => {
         let value = e.target.value.replace(/\D/g, '');
         
-        // Remove leading 7 or 8 if present
         if (value.length > 0 && (value[0] === '7' || value[0] === '8')) {
             value = value.substring(1);
         }
         
-        // Limit to 10 digits
         value = value.substring(0, 10);
         
-        // Apply mask
-        let formattedValue = '';
+        let formatted = '';
         if (value.length > 0) {
-            formattedValue = '+7 (';
-            
+            formatted = '+7 (';
             if (value.length <= 3) {
-                formattedValue += value;
+                formatted += value;
             } else {
-                formattedValue += value.substring(0, 3) + ')';
-                
+                formatted += value.substring(0, 3) + ')';
                 if (value.length <= 6) {
-                    formattedValue += ' ' + value.substring(3);
+                    formatted += ' ' + value.substring(3);
                 } else {
-                    formattedValue += ' ' + value.substring(3, 6) + '-';
-                    
+                    formatted += ' ' + value.substring(3, 6) + '-';
                     if (value.length <= 8) {
-                        formattedValue += value.substring(6);
+                        formatted += value.substring(6);
                     } else {
-                        formattedValue += value.substring(6, 8) + '-';
-                        formattedValue += value.substring(8, 10);
+                        formatted += value.substring(6, 8) + '-' + value.substring(8, 10);
                     }
                 }
             }
         }
         
-        e.target.value = formattedValue;
+        e.target.value = formatted;
     });
     
-    // Handle backspace properly
-    input.addEventListener('keydown', (e) => {
-        if (e.key === 'Backspace') {
-            const value = input.value;
-            const cursorPos = input.selectionStart;
-            
-            // If cursor is right after a non-digit character, move it back
-            if (cursorPos > 0 && !/\d/.test(value[cursorPos - 1])) {
-                e.preventDefault();
-                input.setSelectionRange(cursorPos - 1, cursorPos - 1);
-            }
+    // Validation
+    function validateName() {
+        const value = nameInput.value.trim();
+        const errorEl = document.getElementById('nameError');
+        
+        if (value.length < 2) {
+            showError(nameInput, errorEl, 'Введите имя (минимум 2 символа)');
+            return false;
         }
-    });
-}
-
-/* ========================================
-   Validation Functions
-   ======================================== */
-function validateName(input) {
-    if (!input) return false;
-    
-    const value = input.value.trim();
-    const errorEl = document.getElementById('nameError');
-    
-    if (value.length === 0) {
-        showError(input, errorEl, 'Введите ваше имя');
-        return false;
+        
+        clearError(nameInput, errorEl);
+        return true;
     }
     
-    if (value.length < 2) {
-        showError(input, errorEl, 'Имя должно содержать минимум 2 символа');
-        return false;
+    function validatePhone() {
+        const digits = phoneInput.value.replace(/\D/g, '');
+        const errorEl = document.getElementById('phoneError');
+        const phoneDigits = digits.startsWith('7') ? digits.substring(1) : digits;
+        
+        if (phoneDigits.length < 10) {
+            showError(phoneInput, errorEl, 'Введите полный номер телефона');
+            return false;
+        }
+        
+        clearError(phoneInput, errorEl);
+        return true;
     }
     
-    clearError(input, errorEl);
-    return true;
-}
-
-function validatePhone(input) {
-    if (!input) return false;
-    
-    const value = input.value.replace(/\D/g, '');
-    const errorEl = document.getElementById('phoneError');
-    
-    // Check if phone has at least 10 digits (after country code)
-    const phoneDigits = value.startsWith('7') || value.startsWith('8') 
-        ? value.substring(1) 
-        : value;
-    
-    if (phoneDigits.length === 0) {
-        showError(input, errorEl, 'Введите номер телефона');
-        return false;
-    }
-    
-    if (phoneDigits.length < 10) {
-        showError(input, errorEl, 'Введите полный номер телефона');
-        return false;
-    }
-    
-    clearError(input, errorEl);
-    return true;
-}
-
-function showError(input, errorEl, message) {
-    if (input) {
+    function showError(input, errorEl, message) {
         input.classList.add('form__input--error');
+        if (errorEl) errorEl.textContent = message;
     }
-    if (errorEl) {
-        errorEl.textContent = message;
-    }
-}
-
-function clearError(input, errorEl) {
-    if (input) {
+    
+    function clearError(input, errorEl) {
         input.classList.remove('form__input--error');
+        if (errorEl) errorEl.textContent = '';
     }
-    if (errorEl) {
-        errorEl.textContent = '';
-    }
-}
-
-function clearValidation(input) {
-    if (!input) return;
-    const errorEl = document.getElementById(input.id + 'Error');
-    clearError(input, errorEl);
-}
-
-/* ========================================
-   Simulate Request
-   ======================================== */
-function simulateRequest(delay) {
-    return new Promise((resolve) => {
-        setTimeout(resolve, delay);
+    
+    // Real-time validation
+    nameInput.addEventListener('blur', validateName);
+    phoneInput.addEventListener('blur', validatePhone);
+    
+    nameInput.addEventListener('input', () => {
+        if (nameInput.classList.contains('form__input--error')) validateName();
+    });
+    
+    phoneInput.addEventListener('input', () => {
+        if (phoneInput.classList.contains('form__input--error')) validatePhone();
+    });
+    
+    // Form submit
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const isNameValid = validateName();
+        const isPhoneValid = validatePhone();
+        
+        if (!isNameValid || !isPhoneValid) {
+            if (!isNameValid) nameInput.focus();
+            else phoneInput.focus();
+            return;
+        }
+        
+        // Show loader
+        submitBtn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoader.style.display = 'block';
+        
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Show success modal
+        showModal();
+        
+        // Reset form
+        form.reset();
+        submitBtn.disabled = false;
+        btnText.style.display = '';
+        btnLoader.style.display = 'none';
     });
 }
 
-/* ========================================
-   Success Modal
-   ======================================== */
-function showSuccessModal() {
+// Modal
+function showModal() {
     const modal = document.getElementById('successModal');
-    const closeBtn = modal?.querySelector('.modal__close');
-    const overlay = modal?.querySelector('.modal__overlay');
-    
-    if (!modal) return;
+    const closeBtn = document.getElementById('modalClose');
+    const overlay = modal.querySelector('.modal__overlay');
     
     modal.classList.add('modal--active');
     document.body.style.overflow = 'hidden';
     
-    function closeModal() {
+    function close() {
         modal.classList.remove('modal--active');
         document.body.style.overflow = '';
     }
     
-    closeBtn?.addEventListener('click', closeModal);
-    overlay?.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', close);
     
-    // Close on escape
-    document.addEventListener('keydown', function escapeHandler(e) {
+    document.addEventListener('keydown', function esc(e) {
         if (e.key === 'Escape') {
-            closeModal();
-            document.removeEventListener('keydown', escapeHandler);
+            close();
+            document.removeEventListener('keydown', esc);
         }
     });
 }
 
-/* ========================================
-   Scroll Animations
-   ======================================== */
+// Scroll animations
 function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll(
-        '.benefit-card, .service-card, .step, .result-card'
-    );
+    const elements = document.querySelectorAll('.animate-in');
     
-    if (!animatedElements.length) return;
-    
-    // Add animation class to elements
-    animatedElements.forEach(el => {
-        el.classList.add('animate-on-scroll');
-    });
-    
-    // Intersection Observer
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-on-scroll--visible');
+                setTimeout(() => {
+                    entry.target.classList.add('animate-in--visible');
+                }, index * 100);
                 observer.unobserve(entry.target);
             }
         });
@@ -361,14 +210,10 @@ function initScrollAnimations() {
         rootMargin: '0px 0px -50px 0px'
     });
     
-    animatedElements.forEach(el => {
-        observer.observe(el);
-    });
+    elements.forEach(el => observer.observe(el));
 }
 
-/* ========================================
-   Smooth Scroll
-   ======================================== */
+// Smooth scroll
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -380,43 +225,13 @@ function initSmoothScroll() {
             
             e.preventDefault();
             
-            const headerOffset = 90;
-            const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            const offset = 100;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
             
             window.scrollTo({
-                top: offsetPosition,
+                top: targetPosition,
                 behavior: 'smooth'
             });
         });
     });
-}
-
-/* ========================================
-   Utility Functions
-   ======================================== */
-
-// Debounce function for performance
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Throttle function for scroll events
-function throttle(func, limit) {
-    let inThrottle;
-    return function(...args) {
-        if (!inThrottle) {
-            func.apply(this, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
 }
