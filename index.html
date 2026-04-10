@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Профессиональный ремонт техники. Быстрый выезд мастера, гарантия на работы. Оставьте заявку прямо сейчас.">
+    <title>TechFix — Ремонт техники | Быстрый выезд мастера</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Demo Notice -->
+    <div class="demo-notice">
+        <span>Это демонстрационный проект. Все заявки имитируются.</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <a href="#" class="logo">
+                    <span class="logo__icon">⚡</span>
+                    <span class="logo__text">TechFix</span>
+                </a>
+                <nav class="nav">
+                    <a href="#services" class="nav__link">Услуги</a>
+                    <a href="#how-it-works" class="nav__link">Как это работает</a>
+                    <a href="#contact" class="nav__link">Контакты</a>
+                </nav>
+                <a href="#contact" class="btn btn--small header__cta">Оставить заявку</a>
+                <button class="burger" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <nav class="mobile-menu__nav">
+            <a href="#services" class="mobile-menu__link">Услуги</a>
+            <a href="#how-it-works" class="mobile-menu__link">Как это работает</a>
+            <a href="#contact" class="mobile-menu__link">Контакты</a>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <h1 class="hero__title">
+                    Ремонт техники<br>
+                    <span class="text-accent">с выездом на дом</span>
+                </h1>
+                <p class="hero__subtitle">
+                    Профессиональный ремонт бытовой техники. Гарантия до 2 лет. 
+                    Выезд мастера в течение часа.
+                </p>
+                <div class="hero__actions">
+                    <a href="#contact" class="btn btn--primary btn--large">Оставить заявку</a>
+                    <span class="hero__note">Бесплатная диагностика</span>
+                </div>
+                <div class="hero__metrics">
+                    <div class="metric">
+                        <span class="metric__value">12+</span>
+                        <span class="metric__label">лет опыта</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric__value">5 000+</span>
+                        <span class="metric__label">выполненных заявок</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric__value">15 мин</span>
+                        <span class="metric__label">среднее время ответа</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero__gradient"></div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits section">
+        <div class="container">
+            <h2 class="section__title">Почему выбирают нас</h2>
+            <div class="benefits__grid">
+                <div class="benefit-card">
+                    <div class="benefit-card__icon">🚀</div>
+                    <h3 class="benefit-card__title">Быстрый выезд</h3>
+                    <p class="benefit-card__text">Мастер приедет в течение часа или в удобное для вас время</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon">🛡️</div>
+                    <h3 class="benefit-card__title">Гарантия качества</h3>
+                    <p class="benefit-card__text">Предоставляем гарантию до 2 лет на все виды работ</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon">💰</div>
+                    <h3 class="benefit-card__title">Честные цены</h3>
+                    <p class="benefit-card__text">Фиксированная стоимость без скрытых платежей</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon">🔧</div>
+                    <h3 class="benefit-card__title">Оригинальные запчасти</h3>
+                    <p class="benefit-card__text">Используем только сертифицированные комплектующие</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services section section--dark">
+        <div class="container">
+            <h2 class="section__title">Наши услуги</h2>
+            <div class="services__grid">
+                <div class="service-card">
+                    <div class="service-card__image">
+                        <div class="service-card__placeholder">🧊</div>
+                    </div>
+                    <h3 class="service-card__title">Ремонт холодильников</h3>
+                    <p class="service-card__text">Замена компрессора, устранение утечек, заправка фреона</p>
+                    <span class="service-card__price">от 1 500 ₽</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-card__image">
+                        <div class="service-card__placeholder">👕</div>
+                    </div>
+                    <h3 class="service-card__title">Ремонт стиральных машин</h3>
+                    <p class="service-card__text">Замена подшипников, ремонт модуля управления, насоса</p>
+                    <span class="service-card__price">от 1 200 ₽</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-card__image">
+                        <div class="service-card__placeholder">🍽️</div>
+                    </div>
+                    <h3 class="service-card__title">Ремонт посудомоек</h3>
+                    <p class="service-card__text">Чистка фильтров, замена ТЭНа, ремонт циркуляционного насоса</p>
+                    <span class="service-card__price">от 1 800 ₽</span>
+                </div>
+                <div class="service-card">
+                    <div class="service-card__image">
+                        <div class="service-card__placeholder">🔥</div>
+                    </div>
+                    <h3 class="service-card__title">Ремонт духовых шкафов</h3>
+                    <p class="service-card__text">Замена ТЭНов, термостатов, ремонт дверных петель</p>
+                    <span class="service-card__price">от 2 000 ₽</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works section">
+        <div class="container">
+            <h2 class="section__title">Как это работает</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step__number">01</div>
+                    <div class="step__content">
+                        <h3 class="step__title">Оставьте заявку</h3>
+                        <p class="step__text">Заполните форму на сайте или позвоните нам</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step__number">02</div>
+                    <div class="step__content">
+                        <h3 class="step__title">Диагностика</h3>
+                        <p class="step__text">Мастер проведёт бесплатную диагностику на месте</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step__number">03</div>
+                    <div class="step__content">
+                        <h3 class="step__title">Ремонт</h3>
+                        <p class="step__text">Выполняем ремонт с использованием качественных запчастей</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step__number">04</div>
+                    <div class="step__content">
+                        <h3 class="step__title">Гарантия</h3>
+                        <p class="step__text">Выдаём документы с гарантией на выполненные работы</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section id="contact" class="form-section section section--dark">
+        <div class="container">
+            <div class="form-section__inner">
+                <div class="form-section__content">
+                    <h2 class="section__title">Оставьте заявку</h2>
+                    <p class="form-section__subtitle">
+                        Заполните форму, и мы свяжемся с вами в течение 15 минут
+                    </p>
+                </div>
+                <form class="form" id="requestForm" novalidate>
+                    <div class="form__group">
+                        <label class="form__label" for="name">Ваше имя</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            class="form__input" 
+                            placeholder="Иван Иванов"
+                            required
+                        >
+                        <span class="form__error" id="nameError"></span>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="phone">Телефон</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            class="form__input" 
+                            placeholder="+7 (___) ___-__-__"
+                            required
+                        >
+                        <span class="form__error" id="phoneError"></span>
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="comment">Комментарий</label>
+                        <textarea 
+                            id="comment" 
+                            name="comment" 
+                            class="form__textarea" 
+                            placeholder="Опишите проблему или модель техники"
+                            rows="4"
+                        ></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--large form__submit">
+                        <span class="btn__text">Отправить заявку</span>
+                        <span class="btn__loader">
+                            <span class="spinner"></span>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results section">
+        <div class="container">
+            <h2 class="section__title">Результаты работы</h2>
+            <div class="results__grid">
+                <div class="result-card">
+                    <span class="result-card__value">+30</span>
+                    <span class="result-card__label">новых заявок ежедневно</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-card__value">8.5%</span>
+                    <span class="result-card__label">конверсия сайта</span>
+                </div>
+                <div class="result-card">
+                    <span class="result-card__value">98%</span>
+                    <span class="result-card__label">довольных клиентов</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__brand">
+                    <a href="#" class="logo">
+                        <span class="logo__icon">⚡</span>
+                        <span class="logo__text">TechFix</span>
+                    </a>
+                    <p class="footer__text">Профессиональный ремонт бытовой техники с выездом на дом</p>
+                </div>
+                <div class="footer__links">
+                    <a href="#services" class="footer__link">Услуги</a>
+                    <a href="#how-it-works" class="footer__link">Как это работает</a>
+                    <a href="#contact" class="footer__link">Контакты</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">© 2026 TechFix. Все права защищены.</p>
+                <p class="footer__demo">Демонстрационный проект</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Mobile CTA -->
+    <div class="sticky-cta">
+        <a href="#contact" class="btn btn--primary btn--full">Оставить заявку</a>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal__overlay"></div>
+        <div class="modal__content">
+            <div class="modal__icon">✓</div>
+            <h3 class="modal__title">Заявка отправлена</h3>
+            <p class="modal__text">Уведомление отправлено в Telegram</p>
+            <p class="modal__note">(демо-режим)</p>
+            <button class="btn btn--primary modal__close">Отлично</button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
