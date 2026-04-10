@@ -1,22 +1,25 @@
 /* ========================================
-   TechFix Landing Page Styles
-   Dark theme with neon green accent
+   MasterDom — Ремонт техники с выездом на дом
+   Warm professional theme with blue accent
    ======================================== */
 
 /* CSS Variables */
 :root {
-    --color-bg: #0a0a0f;
-    --color-bg-secondary: #12121a;
-    --color-bg-card: #1a1a25;
-    --color-text: #e8e8ec;
-    --color-text-secondary: #9a9aa4;
-    --color-text-muted: #6a6a74;
-    --color-accent: #00ff88;
-    --color-accent-dark: #00cc6a;
-    --color-accent-glow: rgba(0, 255, 136, 0.3);
-    --color-border: #2a2a35;
-    --color-error: #ff4757;
-    --color-success: #2ed573;
+    --color-bg: #f8f9fa;
+    --color-bg-secondary: #ffffff;
+    --color-bg-card: #ffffff;
+    --color-text: #1a1a2e;
+    --color-text-secondary: #4a4a5a;
+    --color-text-muted: #7a7a8a;
+    --color-accent: #2563eb;
+    --color-accent-dark: #1d4ed8;
+    --color-accent-light: #3b82f6;
+    --color-accent-glow: rgba(37, 99, 235, 0.15);
+    --color-border: #e5e7eb;
+    --color-error: #ef4444;
+    --color-success: #22c55e;
+    --color-warm: #f97316;
+    --color-warm-light: #fb923c;
     
     --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     
@@ -92,7 +95,7 @@ input, textarea {
    Demo Notice
    ======================================== */
 .demo-notice {
-    background: linear-gradient(90deg, rgba(0, 255, 136, 0.1), rgba(0, 204, 106, 0.1));
+    background: linear-gradient(90deg, rgba(249, 115, 22, 0.1), rgba(251, 146, 60, 0.1));
     border-bottom: 1px solid var(--color-border);
     padding: 10px 20px;
     text-align: center;
@@ -119,15 +122,17 @@ input, textarea {
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(10, 10, 15, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--color-border);
     transition: var(--transition-normal);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
 }
 
 .header--scrolled {
     top: 0;
-    background: rgba(10, 10, 15, 0.98);
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
 }
 
 .header__inner {
@@ -151,10 +156,12 @@ input, textarea {
 }
 
 .logo__text {
-    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-text);
+    font-weight: 800;
+}
+
+.logo__text span {
+    color: var(--color-warm);
 }
 
 .nav {
@@ -230,7 +237,7 @@ input, textarea {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(10, 10, 15, 0.98);
+    background: rgba(255, 255, 255, 0.98);
     z-index: 99;
     display: flex;
     align-items: center;
@@ -281,15 +288,15 @@ input, textarea {
 }
 
 .btn--primary {
-    background: var(--color-accent);
-    color: var(--color-bg);
-    box-shadow: 0 4px 20px var(--color-accent-glow);
+    background: var(--color-warm);
+    color: white;
+    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3);
 }
 
 .btn--primary:hover {
-    background: var(--color-accent-dark);
+    background: var(--color-warm-light);
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px var(--color-accent-glow);
+    box-shadow: 0 6px 24px rgba(249, 115, 22, 0.4);
 }
 
 .btn--primary:active {
@@ -363,7 +370,7 @@ input, textarea {
     right: 0;
     width: 60%;
     height: 100%;
-    background: radial-gradient(ellipse at top right, rgba(0, 255, 136, 0.08) 0%, transparent 60%);
+    background: radial-gradient(ellipse at top right, rgba(37, 99, 235, 0.08) 0%, transparent 60%);
     pointer-events: none;
 }
 
@@ -382,8 +389,7 @@ input, textarea {
 }
 
 .text-accent {
-    color: var(--color-accent);
-    text-shadow: 0 0 40px var(--color-accent-glow);
+    color: var(--color-warm);
 }
 
 .hero__subtitle {
@@ -423,7 +429,7 @@ input, textarea {
 .metric__value {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--color-accent);
+    color: var(--color-warm);
 }
 
 .metric__label {
@@ -440,7 +446,7 @@ input, textarea {
 }
 
 .section--dark {
-    background: var(--color-bg-secondary);
+    background: linear-gradient(135deg, #f0f4ff 0%, #f8f9fa 100%);
 }
 
 .section__title {
@@ -470,8 +476,8 @@ input, textarea {
 
 .benefit-card:hover {
     transform: translateY(-4px);
-    border-color: var(--color-accent);
-    box-shadow: var(--shadow-glow);
+    border-color: var(--color-warm);
+    box-shadow: 0 10px 40px rgba(249, 115, 22, 0.1);
 }
 
 .benefit-card__icon {
@@ -510,13 +516,13 @@ input, textarea {
 
 .service-card:hover {
     transform: translateY(-4px);
-    border-color: var(--color-accent);
+    border-color: var(--color-warm);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
 }
 
 .service-card__image {
     width: 100%;
     aspect-ratio: 16/10;
-    background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-bg-secondary) 100%);
     border-radius: var(--radius-md);
     margin-bottom: 20px;
     display: flex;
@@ -525,9 +531,15 @@ input, textarea {
     overflow: hidden;
 }
 
-.service-card__placeholder {
-    font-size: 3rem;
-    opacity: 0.8;
+.service-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.service-card:hover .service-card__image img {
+    transform: scale(1.05);
 }
 
 .service-card__title {
@@ -546,7 +558,7 @@ input, textarea {
 .service-card__price {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--color-accent);
+    color: var(--color-warm);
 }
 
 /* ========================================
@@ -572,13 +584,13 @@ input, textarea {
 }
 
 .step:hover {
-    border-color: var(--color-accent);
+    border-color: var(--color-warm);
 }
 
 .step__number {
     font-size: 2rem;
     font-weight: 800;
-    color: var(--color-accent);
+    color: var(--color-warm);
     opacity: 0.5;
     line-height: 1;
     min-width: 50px;
@@ -656,8 +668,8 @@ input, textarea {
 .form__input:focus,
 .form__textarea:focus {
     outline: none;
-    border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px var(--color-accent-glow);
+    border-color: var(--color-warm);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
 }
 
 .form__input--error,
@@ -704,7 +716,7 @@ input, textarea {
 }
 
 .result-card:hover {
-    border-color: var(--color-accent);
+    border-color: var(--color-warm);
     transform: translateY(-4px);
 }
 
@@ -712,9 +724,8 @@ input, textarea {
     display: block;
     font-size: 3rem;
     font-weight: 800;
-    color: var(--color-accent);
+    color: var(--color-warm);
     margin-bottom: 8px;
-    text-shadow: 0 0 30px var(--color-accent-glow);
 }
 
 .result-card__label {
@@ -726,9 +737,10 @@ input, textarea {
    Footer
    ======================================== */
 .footer {
-    background: var(--color-bg-secondary);
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     border-top: 1px solid var(--color-border);
     padding: 48px 0 24px;
+    color: white;
 }
 
 .footer__inner {
@@ -762,7 +774,7 @@ input, textarea {
 }
 
 .footer__link:hover {
-    color: var(--color-accent);
+    color: var(--color-warm-light);
 }
 
 .footer__bottom {
@@ -849,15 +861,15 @@ input, textarea {
 .modal__icon {
     width: 64px;
     height: 64px;
-    background: var(--color-accent);
-    color: var(--color-bg);
+    background: var(--color-warm);
+    color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 2rem;
     margin: 0 auto 24px;
-    box-shadow: 0 0 30px var(--color-accent-glow);
+    box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);
 }
 
 .modal__title {
